@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Chart Noir</title>
+  <meta name="description" content="Chart Noir. Prendas únicas hechas a mano, con telas elegidas una a una. Obra 001: pieza 1/1.">
+  <meta name="theme-color" content="#000000">
+  <meta name="color-scheme" content="dark">
+
+  <!-- Imagen y textos al compartir el enlace (Instagram, WhatsApp, X...).
+       Dirección completa: algunas redes no aceptan rutas cortas. Si un día hay
+       dominio propio (ej. chartnoir.com), cambiar aquí las dos direcciones. -->
+  <meta property="og:url" content="https://chartnoir.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Chart Noir">
+  <meta property="og:title" content="Chart Noir">
+  <meta property="og:description" content="Hecho a mano. Una sola vez. Obra 001.">
+  <meta property="og:image" content="https://chartnoir.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="El vestidor de Chart Noir con el logo plateado en el centro">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- Tipografía: Archivo (una sola familia, con eje de anchura) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
+  <script type="module" crossorigin src="./assets/index-B2I-PxmX.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-DB9ogfPa.css">
+</head>
+<body class="is-loading">
+  <a class="skip" href="#obra">Saltar al contenido</a>
+  <div id="flash" aria-hidden="true"></div>
+
+  <!-- ===== Pantalla de carga ===== -->
+  <div id="loader" role="status" aria-live="polite" aria-label="Cargando">
+    <p class="loader-brand" aria-hidden="true">Chart Noir</p>
+    <div id="num" aria-hidden="true">000</div>
+    <div id="bar" aria-hidden="true"></div>
+  </div>
+
+  <!-- ===== Cabecera ===== -->
+  <header class="top">
+    <a class="brand" href="#inicio" aria-label="Chart Noir, volver arriba">
+      <img src="favicon.svg" alt="" width="26" height="26">
+      <span>Chart Noir</span>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#obra">Obra 001</a>
+      <a href="#voz">Tu voz</a>
+      <a href="#taller">Taller</a>
+    </nav>
+    <p class="mini" id="mini" aria-hidden="true">
+      <span class="mini-label">Drop</span>
+      <span><b data-unit="d">00</b>d</span>
+      <span><b data-unit="h">00</b>h</span>
+      <span><b data-unit="m">00</b>m</span>
+      <span><b data-unit="s">00</b>s</span>
+    </p>
+  </header>
+
+  <main>
+    <!-- ===== Portada: el vestidor gira alrededor del logo ===== -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-sticky">
+        <canvas id="scene" role="img" aria-label="Vestidor circular de Chart Noir en 3D, convertido en museo de arte: friso con letras de museo, cartelas, cordón de terciopelo y fotos del taller enmarcadas. El símbolo plateado flota en el centro; la sala gira a su alrededor en todas direcciones, también por encima y por debajo. En el escaparate iluminado cuelga Génesis, la Obra 001: chaleco y pantalón. Arrastra el símbolo para girarlo, arrastra fuera para mirar alrededor y toca una prenda para verla."></canvas>
+        <div class="labels" id="labels"></div>
+
+        <h1 class="visually-hidden" id="hero-title">Chart Noir. Hecho a mano. Una sola vez.</h1>
+        <p class="hint" id="hint" aria-hidden="true">Gira el símbolo · Arrastra fuera para girar la sala en cualquier dirección · Toca una prenda</p>
+
+        <div class="hero-bottom" id="hero-bottom">
+          <div class="hero-actions">
+            <button class="round" type="button" id="turn-left" aria-label="Girar la sala a la izquierda">‹</button>
+            <a class="pill" href="#obra">Ver Obra 001</a>
+            <button class="pill pill-ghost" type="button" id="explore" hidden>360°</button>
+            <button class="round" type="button" id="turn-right" aria-label="Girar la sala a la derecha">›</button>
+          </div>
+        </div>
+
+        <button class="pill explore-exit" type="button" id="explore-exit">Salir del 360°</button>
+
+        <div class="hero-caption" id="hero-caption">
+          <p class="eyebrow">Obra 001 · 1/1 · Talla M · Chaleco y pantalón</p>
+          <p class="hero-caption-title" id="caption-title">Génesis.</p>
+          <button class="pill" type="button" id="caption-open">Verlo de cerca</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Obra 001: el conjunto se separa al hacer scroll ===== -->
+    <section class="obra" id="obra" aria-labelledby="obra-title">
+      <div class="obra-sticky">
+        <div class="obra-copy">
+          <p class="eyebrow reveal"><span data-obra="numero"></span> · <span class="ed" data-obra="edicion"></span> · Talla <span data-obra="talla"></span></p>
+          <h2 class="title reveal" id="obra-title" data-obra="titular"></h2>
+          <p class="body reveal" data-obra="texto"></p>
+          <ul class="facts reveal" id="obra-facts"></ul>
+          <p class="obra-help" id="obra-help">Sigue bajando: el conjunto se separa. Toca una pieza para verla.</p>
+        </div>
+        <div class="set-wrap">
+          <div class="set" id="set"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Tu voz: puja y opinión ===== -->
+    <section class="voz" id="voz" aria-labelledby="voz-title">
+      <p class="eyebrow reveal">Tu voz</p>
+      <h2 class="title reveal" id="voz-title">Tu precio.<br>Tu opinión.</h2>
+      <p class="body reveal">Chart Noir se construye con quien la lleva. Dinos cuánto pagarías por la Obra 001 y qué te parece. Lo leemos todo.</p>
+      <p class="voz-off" id="voz-off" hidden>Las pujas y opiniones se abren muy pronto. Mientras tanto, escríbenos por Instagram.</p>
+
+      <div class="voz-grid">
+        <form class="card reveal" id="bid-form" novalidate>
+          <p class="eyebrow">Puja · Obra <span data-obra="numero-corto"></span> · 1/1</p>
+          <h3 class="card-title">¿Cuánto pagarías?</h3>
+          <div class="amount">
+            <label class="visually-hidden" for="bid-amount">Cantidad en euros</label>
+            <input id="bid-amount" name="cantidad" type="number" inputmode="numeric" min="1" max="5000" step="1" value="150" required>
+            <span class="amount-cur" aria-hidden="true">€</span>
+          </div>
+          <label class="visually-hidden" for="bid-range">Ajusta la cantidad</label>
+          <input class="range" id="bid-range" type="range" min="40" max="600" step="5" value="150">
+          <div class="field">
+            <label for="bid-name">Nombre <span>opcional</span></label>
+            <input id="bid-name" name="nombre" type="text" maxlength="60" autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="bid-contact">Instagram o email <span>opcional, para contactarte</span></label>
+            <input id="bid-contact" name="contacto" type="text" maxlength="100" autocomplete="email">
+          </div>
+          <button class="btn" type="submit" disabled>Registrar puja</button>
+          <p class="status" id="bid-status" role="status" aria-live="polite"></p>
+        </form>
+
+        <form class="card reveal" id="opinion-form" novalidate>
+          <p class="eyebrow">Opinión</p>
+          <h3 class="card-title">¿Qué te parece?</h3>
+          <fieldset class="stars">
+            <legend>¿Lo recomendarías?</legend>
+            <div class="stars-row">
+              <input type="radio" id="r1" name="nota" value="1"><label for="r1">1</label>
+              <input type="radio" id="r2" name="nota" value="2"><label for="r2">2</label>
+              <input type="radio" id="r3" name="nota" value="3"><label for="r3">3</label>
+              <input type="radio" id="r4" name="nota" value="4"><label for="r4">4</label>
+              <input type="radio" id="r5" name="nota" value="5"><label for="r5">5</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="op-text">Tu opinión</label>
+            <textarea id="op-text" name="texto" rows="4" maxlength="600" required placeholder="Qué te gusta, qué cambiarías, qué te gustaría ver después."></textarea>
+          </div>
+          <div class="field">
+            <label for="op-name">Nombre <span>opcional</span></label>
+            <input id="op-name" name="nombre" type="text" maxlength="60" autocomplete="name">
+          </div>
+          <button class="btn" type="submit" disabled>Enviar opinión</button>
+          <p class="status" id="op-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+      <p class="privacy reveal">Solo usaremos tus datos para responderte sobre Chart Noir. Nunca los compartimos.</p>
+
+      <!-- Solo lo ve el dueño de la web -->
+      <div class="owner" id="owner" hidden>
+        <p class="eyebrow">Solo tú ves esto · Respuestas recibidas</p>
+        <div class="owner-grid">
+          <div>
+            <h3 class="card-title">Pujas <span id="owner-bid-count"></span></h3>
+            <table class="owner-table"><thead><tr><th>€</th><th>Nombre</th><th>Contacto</th><th>Fecha</th></tr></thead><tbody id="owner-bids"></tbody></table>
+          </div>
+          <div>
+            <h3 class="card-title">Opiniones <span id="owner-op-count"></span></h3>
+            <ul class="owner-ops" id="owner-ops"></ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== El taller ===== -->
+    <section class="taller" id="taller" aria-labelledby="taller-title">
+      <p class="eyebrow reveal">El taller</p>
+      <h2 class="visually-hidden" id="taller-title">Cómo se hace Chart Noir</h2>
+      <ol class="claims">
+        <li class="claim">
+          <h3 class="title reveal">Hecho a mano.</h3>
+          <p class="body reveal">Por ahora, todo pasa por nuestras manos: el patrón, el corte y cada costura. Sin fábrica y sin prisa.</p>
+        </li>
+        <li class="claim">
+          <h3 class="title reveal">Telas elegidas una a una.</h3>
+          <p class="body reveal">La tela se busca antes que el diseño. Si no nos convence al tacto, no se corta.</p>
+        </li>
+        <li class="claim">
+          <h3 class="title reveal">Hecho para durar.</h3>
+          <p class="body reveal">Doble forro y piezas que guardan su forma solas. Cada costura está pensada para que la prenda aguante años.</p>
+        </li>
+      </ol>
+      <div class="proceso" id="proceso"></div>
+    </section>
+
+    <!-- ===== Cierre ===== -->
+    <section class="cierre" id="redes" aria-labelledby="cierre-title">
+      <h2 class="title reveal" id="cierre-title">No es para todos.<br>Nunca lo fue.</h2>
+      <ul class="social reveal" id="social"></ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>© <span id="year">2026</span> Chart Noir</p>
+    <p>Hecho a mano en España</p>
+  </footer>
+
+  <!-- ===== Ficha de una pieza ===== -->
+  <dialog class="piece" id="piece" aria-labelledby="piece-name">
+    <button class="piece-close" type="button" id="piece-close" aria-label="Cerrar">Cerrar</button>
+    <div class="piece-media"><img id="piece-img" alt=""></div>
+    <div class="piece-info">
+      <p class="eyebrow" id="piece-obra"></p>
+      <h2 class="title" id="piece-name"></h2>
+      <p class="piece-ed"><span id="piece-ed"></span><small id="piece-size"></small></p>
+      <p class="body" id="piece-summary"></p>
+      <ul class="piece-details" id="piece-details"></ul>
+      <div class="measures">
+        <p class="eyebrow">Medidas en plano · aproximadas</p>
+        <dl id="piece-measures"></dl>
+      </div>
+      <div class="piece-actions">
+        <a class="btn" id="piece-cta" target="_blank" rel="noopener">Pedir por Instagram</a>
+        <button class="btn btn-line" type="button" id="piece-bid">Pujar por esta obra</button>
+      </div>
+      <button class="link" type="button" id="piece-other"></button>
+    </div>
+  </dialog>
+
+</body>
+</html>

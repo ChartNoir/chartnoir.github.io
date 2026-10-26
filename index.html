@@ -30,8 +30,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap">
-  <script type="module" crossorigin src="./assets/index-B0N-A4M7.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DB9ogfPa.css">
+  <script type="module" crossorigin src="./assets/index-r2RNkxIK.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index--Q7Hoz8D.css">
 </head>
 <body class="is-loading">
   <a class="skip" href="#obra">Saltar al contenido</a>
@@ -218,8 +218,14 @@
 
   <!-- ===== Ficha de una pieza ===== -->
   <dialog class="piece" id="piece" aria-labelledby="piece-name">
-    <button class="piece-close" type="button" id="piece-close" aria-label="Cerrar">Cerrar</button>
-    <div class="piece-media"><img id="piece-img" alt=""></div>
+    <button class="piece-back" type="button" id="piece-back" aria-label="Volver a la web"><span aria-hidden="true">←</span> Volver</button>
+    <button class="piece-close" type="button" id="piece-close" aria-label="Cerrar">Cerrar <span aria-hidden="true">✕</span></button>
+    <div class="piece-media">
+      <button class="round piece-arrow piece-prev" type="button" id="piece-prev" aria-label="Pieza anterior">‹</button>
+      <img id="piece-img" alt="">
+      <button class="round piece-arrow piece-next" type="button" id="piece-next" aria-label="Pieza siguiente">›</button>
+      <p class="piece-count" id="piece-count" aria-live="polite"></p>
+    </div>
     <div class="piece-info">
       <p class="eyebrow" id="piece-obra"></p>
       <h2 class="title" id="piece-name"></h2>
